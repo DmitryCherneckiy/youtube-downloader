@@ -39,6 +39,20 @@ def call_settings_buttons(message):
     buttons(message)
 
 
+def search(topic):
+    url = f"https://www.youtube.com/results?q={topic}"
+    count = 0
+    request = requests.get(url)
+    data = request.content
+    data = str(data)
+    lst = data.split('"')
+    for i in lst:
+        count += 1
+        if i == "WEB_PAGE_TYPE_WATCH":
+            break
+    return f"https://www.youtube.com{lst[count - 5]}"
+
+
 def buttons(message):
     user_id = message.from_user.id
     db_object.execute(f"SELECT mode FROM users WHERE user_id = {user_id}")
