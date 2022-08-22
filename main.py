@@ -39,6 +39,13 @@ def call_settings_buttons(message):
     buttons(message)
 
 
+@bot.message_handler(content_types=["text"])
+def text_handler(message):
+    request_from_user = message.text
+    link = search(request_from_user)
+    bot.send_message(message.chat.id, "Your request was found ✔")
+
+
 def search(topic):
     url = f"https://www.youtube.com/results?q={topic}"
     count = 0
