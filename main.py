@@ -1,16 +1,17 @@
-# This is a sample Python script.
+import os
+import logging
+import requests
+import psycopg2
+import telebot
+from telebot import types
+from pytube import YouTube
+from config import BOT_TOKEN, DB_URL
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+
+bot = telebot.TeleBot(BOT_TOKEN)
+db_connection = psycopg2.connect(DB_URL, sslmode="require")
+db_object = db_connection.cursor()
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    bot.polling(True)
